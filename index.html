@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Single column coming soon page</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/brands.min.css" integrity="sha512-G/T7HQJXSeNV7mKMXeJKlYNJ0jrs8RsWzYG7rVACye+qrcUhEAYKYzaa+VFy6eFzM2+/JT1Q+eqBbZFSHmJQew==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <main>
+        <div class="logo">
+            <img src="images/logo.svg" alt="logo">
+        </div>
+        <h1>We are launching <span>soon!</span></h1>
+        <p>Subscribe and get notified</p>
+        <form action="#" id="form">
+            <div class="input">
+                <input type="email" name="email" id="email">
+            </div>
+            
+            <button type="submit">Notify me</button>
+        </form>
+        <div class="image-form">
+            <img src="images/illustration-dashboard.png" alt="illustration">
+        </div>
+        <div class="socials">
+            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#"><i class="fa-brands fa-twitter"></i></a>
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+        <p>&copy; Copyright Ping. All rights reserved.</p>
+    </main>
+
+    <script>
+        const email = document.querySelector('#email')
+        const regexp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        const form = document.querySelector('#form')
+        const input = document.querySelector('.input')
+
+        email.addEventListener('blur', validation)
+
+        function validation(e){
+            if (regexp.test(e.target.value) && e.target.value.length > 0) {
+                email.classList.remove('error')
+                console.log("email correcto")
+            } else {
+
+                if(e.target.value.length===0){
+                console.log("campo vacío")
+                showError('Complete your email')
+                email.classList.add('error')
+                } if (e.target.value.length > 0){
+                    console.log("cadena de texto mayor que 0")
+                    showError('Put a valid email')
+                    email.classList.add('error')
+                }
+                
+            }
+            
+        }
+
+        function showError(message){
+            const child = document.createElement('p')
+            child.classList.add('error')
+            input.appendChild(child)
+            child.innerText = message
+            setTimeout(()=>{
+                input.removeChild(child)
+            },1500) 
+        }
+        
+    </script>
+</body>
+</html>
